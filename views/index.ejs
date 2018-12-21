@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>HearthStone Card Creator</title>
+  </head>
+  <body>
+    Your Deck:<br>
+    <%for(let i = 0; i < deck.length; i++){%>
+      <div>
+        <%=deck[i].name%><br>
+        (M: <%=deck[i].mana%>, H:<%=deck[i].health%>, A: <%=deck[i].attack%>)<br>
+        <a href='/remove/<%=deck[i].id%>'>remove card</a>
+      </div>
+    <%}%>
+    <hr>
+
+    Available Cards:<br>
+    <%for(let i = 0; i < cards.length; i++){%>
+      <div>
+        <%=cards[i].name%><br>
+        <img src="<%=cards[i].img_url%>" alt='art for <%=cards[i].title%>'>
+        <%=cards[i].description%><br>
+        mana: <%=cards[i].mana%><br>
+        health: <%=cards[i].health%><br>
+        attack: <%=cards[i].attack%><br>
+
+        <form action='/add/<%=cards[i].id%>' method='post'>
+          <button type='submit'>Add to Deck</button>
+        </form>
+        <hr>
+      </div>
+    <%}%>
+
+    Add a New Card:<br>
+      <form action='/new/card' method='post'>
+        <input name='name' placeholder ='card name' autocomplete='off'>
+        <input name='img_url' placeholder ='card image url' autocomplete='off'>
+        <textarea name='description' placeholder='description'></textarea>
+        <input name='mana' type='number' placeholder ='mana' autocomplete='off'>
+        <input name='health' type='number' placeholder ='health' autocomplete='off'>
+        <input name='attack' type='number' placeholder ='attack' autocomplete='off'>
+        <button type='submit'>Create Card</button>
+      </form>
+  </body>
+</html>
